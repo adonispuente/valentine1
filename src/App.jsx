@@ -6,11 +6,36 @@ function App() {
   const [message, setMessage] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [noButtonClicked, setNoButtonClicked] = useState(false)
+  const [noButtonMessageIndex, setNoButtonMessageIndex] = useState(0)
   const noButtonRef = useRef(null)
   const yesButtonRef = useRef(null)
   const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 })
   const [isInitialized, setIsInitialized] = useState(false)
+
+  // Array of messages for the No button
+  const noButtonMessages = [
+    'Clearly this is a mistake',
+    'what are you doing',
+    'thats just disrespectful',
+    'The Lord does not approve of this',
+    'clearly, you are drunk',
+    'youre high too?!?!',
+    'hit your head maybe?',
+    'gonna have to head to a hospital',
+    'unacceptable',
+    'just stab my heart',
+    'missed me',
+    'how could you',
+    'this is heartbreaking',
+    'you must be confused',
+    'are you serious right now',
+    'my heart is breaking',
+    'this cant be real',
+    'youre making a huge mistake',
+    'think about what youre doing',
+    'this is so wrong',
+    'youre breaking my heart'
+  ]
 
   // Replace with your email address 
   const YOUR_EMAIL = 'adonis.puente@gmail.com'
@@ -78,7 +103,10 @@ function App() {
   }
 
   const handleNoClick = () => {
-    setNoButtonClicked(true)
+    // Cycle through messages array
+    setNoButtonMessageIndex((prevIndex) =>
+      (prevIndex + 1) % noButtonMessages.length
+    )
   }
 
   const handleSubmit = async (e) => {
@@ -173,7 +201,7 @@ function App() {
               transition: 'all 0.2s ease-out'
             }}
           >
-            {noButtonClicked ? 'clearly this is a mistake' : 'No 😢'}
+            {noButtonMessageIndex === 0 ? 'No 😢' : noButtonMessages[noButtonMessageIndex]}
           </button>
         </div>
       </div>
